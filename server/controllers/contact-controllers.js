@@ -14,7 +14,7 @@ const contactForm = async(req,res)=>{
       res.status(200).json({message:"message send successfully",Data:addMsg});
 
     } catch (error) {
-      res.status(200).json({message:"message not delivered"});  
+      res.status(400).json({message:"message not delivered"});  
     }
 }
 

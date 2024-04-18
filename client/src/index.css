@@ -1,0 +1,63 @@
+
+
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+}
+
+button {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: #33337f;
+  cursor: pointer;
+  transition: border-color 0.25s;
+}
+button:hover {
+  background-color: #090916;
+  border-color: #e7e7ea;
+  color: #e7e7ea;
+}
+button:focus,
+button:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
+}
+
+*{
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.logo-brand{
+  font-family: 'Gill Sans', 'Gill Sans MT', 'Calibri', 'Trebuchet MS', sans-serif;
+  padding-top: 5px;
+  
+}
+
+label{
+  margin-top: 3%;
+  display:flex;
+  margin-bottom: 1.2rem;
+  text-transform: capitalize;
+  color: darkgray;
+}
+
+input{
+  width: 300px;
+  color: #2b2929;
+  border: 2px solid #635f5f
+}
+
+textarea{
+  width: 300px;
+  border: 2px solid #635f5f
+}
+
+.toastBody{
+  font-size: medium;
+  color: white;
+}

@@ -44,7 +44,7 @@ const userSchema = new mongoose.Schema({
 //   }
 // })
 
-//compare the password method2 of compare password his first part in auth controllers
+//compare the password METHOD2 of compare password his first part in auth controllers
 // userSchema.methods.comparePassword = async function(password){ 
 //    return bcrypt.compare(password,this.password)
 // }

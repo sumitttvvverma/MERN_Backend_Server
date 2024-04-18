@@ -2,8 +2,9 @@ const express =require('express');
 const router =express.Router();
 // const {home,register} =require("../controllers/auth-controllers")
 const authcontrollers =require("../controllers/auth-controllers");
-const signupSchema = require('../validators/auth-validator');
+const {signupSchema,loginSchema} = require('../validators/auth-validator');
 const validate = require('../middlewares/validate-middlewares');
+const authMiddleware = require("../middlewares/auth-middleware");
 
 //1.this is old router
 router.get('/old',(req,res)=>{
@@ -29,10 +30,12 @@ router.route('/').get(authcontrollers.home);
 
 //3.syntax way auth router with auth controllers
 // router.route('/register').get(register)
-router.route('/register').post(validate(signupSchema),authcontrollers.register)         //add validate(arg...schema)
+router.route('/register').post(validate(signupSchema),authcontrollers.register);         //add validate(arg...schema)
 
 //LOGIN
-router.route('/login').post(authcontrollers.login);
+router.route('/login').post(validate(loginSchema),authcontrollers.login);
 
+//30 lec. jWT token verification middleware +creating Route to Get User Data from DB
+router.route('/user').get(authMiddleware,authcontrollers.user);
 
 module.exports = router;

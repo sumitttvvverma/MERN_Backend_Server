@@ -9,8 +9,8 @@ const home= async(req,res)=>{
    }
 }
 
-//REGISTER
-const register= async(req,res)=>{
+//REGISTER >>>>>>>>>>>
+const register= async(req,res)=>{          //http://localhost:4004/api/auth/register
     try {
    //  res.status(200).send("welcoming in auth-controllers of controller : registeration")
     console.log(req.body); 
@@ -22,7 +22,7 @@ const register= async(req,res)=>{
     const userExist = await User.findOne({ email: email });
 
     if(userExist){
-      return res.status(400).json({msg:"email is already exist"})
+      return res.status(400).json({msg:"email is already exist"})  //
     }
   
     //hash the password using bcrypt method1
@@ -46,8 +46,8 @@ const register= async(req,res)=>{
     }
  }
 
-//LOGIN
-const login =async(req,res)=>{
+//LOGIN >>>>>>>>>>>>>>
+const login =async(req,res)=>{              //http://localhost:4004/api/auth/login
   try {
     const {email,password}=req.body;
 
@@ -55,7 +55,7 @@ const login =async(req,res)=>{
     // console.log(userExist);
 
     if(!userExist){
-     res.status(400).json({msg:"Invaild Credentials"})
+     res.status(400).json({msg:"Invaild Credentials sumit/login"})
     }
 
     //method 1
@@ -74,8 +74,21 @@ const login =async(req,res)=>{
       res.status(401).json({msg:"Invaild email or password"})
     }
   } catch (error) {
-    res.status(500).json("internal server error");
+    res.status(500).json({msg:"internal server error @"});
   }
 }
 
-module.exports={home,register,login};
+//to send user data >>>>>>>>>>>> used in lec 29 30
+const user =async(req,res)=>{                 //http://localhost:4004/api/auth/user get request
+  try {
+    // res.status(200).json({msg:"hiii"})
+    const userData = req.user;    //it comes from 
+    // console.log(userData);
+    return res.status(200).json({userData})
+  } catch (error) {
+    console.log("error from the user get-route",error)
+  }
+}
+
+
+module.exports={home,register,login,user};
