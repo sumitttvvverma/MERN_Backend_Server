@@ -9,6 +9,10 @@ import Login from './pages/Login';
 import Navbar from './components/Navbar';
 import Error from './pages/Error';
 import Logout from './pages/Logout';
+import AdminLayout from './layouts/Admin-Layout';
+import AdminUsers from './layouts/Admin-Users';
+import AdminContacts from './layouts/Admin-Contacts';
+import AdminUpdate from './layouts/Admin-Update';
 
 function App() {
 
@@ -26,6 +30,13 @@ function App() {
       <Route path='/logout' element={<Logout/>}></Route>
       
       <Route path='*' element={<Error/>}></Route>     
+
+      {/* Nested Route */}
+      <Route path="/admin" element={<AdminLayout/>}>
+        <Route path='users' element={<AdminUsers/>}></Route>
+        <Route path='contacts' element={<AdminContacts/>}></Route>
+        <Route path='users/:id/edit' element={<AdminUpdate/>}></Route>
+      </Route>
     </Routes>
 </BrowserRouter>    
     </>

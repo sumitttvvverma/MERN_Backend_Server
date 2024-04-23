@@ -1,4 +1,5 @@
 const { z }=require('zod');
+//ZOd validation
 
 //creating an object schema
 const signupSchema = z.object({

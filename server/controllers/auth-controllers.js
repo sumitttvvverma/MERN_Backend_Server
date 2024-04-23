@@ -82,7 +82,7 @@ const login =async(req,res)=>{              //http://localhost:4004/api/auth/log
 const user =async(req,res)=>{                 //http://localhost:4004/api/auth/user get request
   try {
     // res.status(200).json({msg:"hiii"})
-    const userData = req.user;    //it comes from 
+    const userData = req.user;    //it comes from auth middleware
     // console.log(userData);
     return res.status(200).json({userData})
   } catch (error) {

@@ -42,7 +42,7 @@
 }
 
 body{
-  background:url("./images/background.jpg") no-repeat center;
+  background:url("./images/background.jpg") repeat-y;
   background-size: 1500px 1100px;
 }
 

@@ -9,6 +9,9 @@ export const AuthProvider=({children})=>{
     const [user, setUser] = useState("");
     const [token, setToken] = useState(localStorage.getItem("token"))
     const [services,setServices]=useState([])
+    const authorizationToken=`Bearer ${token}`;
+    const [isLoading,setLoading]=useState(true); //lec 52
+
     //tackling the logout functionality
     const LogoutUser=()=>{
         setToken("");
@@ -18,26 +21,31 @@ export const AuthProvider=({children})=>{
     const isLoggedIn=!!token
     console.log(isLoggedIn)
 
-    const storeTokenInLS=(serverToken)=>{       //4th set the localStore
+    const storeTokenInLS=(serverToken)=>{       //4th ,set the localStore
         setToken(serverToken);                  //lec 37 just this single line login-logout navbar problem 
         return localStorage.setItem("token",serverToken);   //key-value
     }
 
     //#30Lec JWT authentication - to get the currently loggedIn userData 
     const userAuthentication = async()=> {
+        setLoading(true)
         try {
             const response=await fetch("http://localhost:4004/api/auth/user",{
                 method:"GET",
                 headers:{
-                    Authorization:`Bearer ${token}`,
+                    Authorization:authorizationToken,
                 },
             });
 
             if(response.ok){
                 const data= await response.json();
                 // console.log("user data",data); //By this u will see userData inside data
-                console.log("user data",data.userData);
+                console.log("user-Auth-data",data.userData);
                 setUser(data.userData);
+                setLoading(false);
+            }else{
+                console.log("error fetching user-auth-data")
+                setLoading(false);
             }
         } catch (error) {
             console.log("Error fetching user data",error)
@@ -51,7 +59,7 @@ export const AuthProvider=({children})=>{
             });
         if(response.ok){
            const data = await response.json();
-           console.log(data.msg); 
+        //    console.log(data.msg); 
            setServices(data.msg);
         }
         
@@ -68,7 +76,7 @@ export const AuthProvider=({children})=>{
 
 
 //exlint-disable-next-line react/prop-type
-    return ( <AuthContext.Provider value={{isLoggedIn ,storeTokenInLS , LogoutUser, user , services}}>
+    return ( <AuthContext.Provider value={{isLoggedIn ,storeTokenInLS , LogoutUser, user , services , authorizationToken ,isLoading}}>
         {children}
     </AuthContext.Provider> )  //Now import AuthProvider to main file and wrap it by its Provider
 }

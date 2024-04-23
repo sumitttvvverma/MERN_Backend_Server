@@ -1,7 +1,7 @@
 
 const validate = (schema) => async(req,res,next) =>{              //schema>here signupSchema,loginSchema as argument
     try {
-        const parseBody = await schema.parseAsync(req.body);
+        const parseBody = await schema.parseAsync(req.body);      //here req.body data is input data what we feed  
         req.body = parseBody;
         next();
     } catch (err) {
